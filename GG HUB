@@ -42,13 +42,13 @@ local Tab = Window:CreateTab("Tab Example", 4483362458) -- Title, Image
 
 local Button = Tab:CreateButton({
    Name = "Infinite Stamina",
-   Callback = function(local Sprinting = game:GetService("ReplicatedStorage").Systems.Character.Game.Sprinting
+   Callback = function()
+   local Sprinting = game:GetService("ReplicatedStorage").Systems.Character.Game.Sprinting
 local m = require(Sprinting)
 m.StaminaLossDisabled = false
 m.MinStamina = -30
 m.StaminaGain = 25
 m.StaminaLoss = 8
-m.SprintSpeed = 27)
-   -- The function that takes place when the button is pressed
+m.SprintSpeed = 27
    end,
 })
