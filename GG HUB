@@ -42,51 +42,7 @@ local Tab = Window:CreateTab("Tab Example", 4483362458) -- Title, Image
 
 local Button = Tab:CreateButton({
    Name = "Infinite Stamina",
-   Callback = function(-- ServerScriptService > InfiniteStaminaAdmin
-
-local Players = game:GetService("Players")
-
--- ✅ Add your Roblox UserId(s) here
-local ADMINS = {
-    [2942626356] = true, -- replace with your UserId
-    [987654321] = true, -- add more if needed
-}
-
--- Give stamina attributes when player joins
-Players.PlayerAdded:Connect(function(player)
-    player:SetAttribute("Stamina", 100)
-    player:SetAttribute("InfiniteStamina", false)
-
-    -- 👀 Simple chat command to toggle infinite stamina
-    player.Chatted:Connect(function(msg)
-        msg = msg:lower()
-
-        if not ADMINS[player.UserId] then return end
-
-        if msg == "!stamina on" then
-            player:SetAttribute("InfiniteStamina", true)
-            player:SetAttribute("Stamina", math.huge) -- infinite
-            print(player.Name .. " enabled infinite stamina")
-
-        elseif msg == "!stamina off" then
-            player:SetAttribute("InfiniteStamina", false)
-            player:SetAttribute("Stamina", 100)
-            print(player.Name .. " disabled infinite stamina")
-        end
-    end)
-end)
-
--- Hook into stamina drain
--- (replace this with how your Forsaken stamina system works)
-game:GetService("RunService").Heartbeat:Connect(function()
-    for _, player in ipairs(Players:GetPlayers()) do
-        if player:GetAttribute("InfiniteStamina") then
-            -- Always max stamina if infinite
-            player:SetAttribute("Stamina", math.huge)
-        end
-    end
-end)
-)
+   Callback = function()
    -- The function that takes place when the button is pressed
    end,
 })
