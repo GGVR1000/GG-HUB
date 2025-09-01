@@ -43,12 +43,26 @@ local Tab = Window:CreateTab("Tab Example", 4483362458) -- Title, Image
 local Button = Tab:CreateButton({
    Name = "Infinite Stamina",
    Callback = function()
-   local Sprinting = game:GetService("ReplicatedStorage").Systems.Character.Game.Sprinting
-local m = require(Sprinting)
-m.StaminaLossDisabled = false
-m.MinStamina = -30
-m.StaminaGain = 25
-m.StaminaLoss = 8
-m.SprintSpeed = 27
+   
+local ReplicatedStorage = cloneref(game:GetService("ReplicatedStorage"))
+
+local module = require(ReplicatedStorage.Systems.Character.Game.Sprinting)
+
+module.StaminaLossDisabled = true
+module.Stamina = math.huge
+module.CanSprint = true
+module.DefaultConfig.StaminaLossDisabled = true
+module.DefaultConfig.MinStamina = math.huge
+module.DefaultConfig.MaxStamina = math.huge
+module.DefaultConfig.StaminaLoss = 0
+
+local old = module.Init
+module.Init = function(...)
+    local result = old(...)
+    module.StaminaLossDisabled = true
+    module.Stamina = math.huge
+    module.CanSprint = true
+    return result
+end27
    end,
 })
