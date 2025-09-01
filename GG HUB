@@ -63,6 +63,6 @@ module.Init = function(...)
     module.Stamina = math.huge
     module.CanSprint = true
     return result
-end27
+end,
    end,
 })
