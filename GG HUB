@@ -92,3 +92,29 @@ task.spawn(function()
 end)
    end,
 })
+
+
+local Tab = Window:CreateTab("Player", 4483362458) -- Title, Image
+
+
+local Button = Tab:CreateButton({
+   Name = "Faster Walkspeed",
+   Callback = function()
+   -- LocalScript inside StarterPlayerScripts
+
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+local humanoid = character:WaitForChild("Humanoid")
+
+-- Set WalkSpeed
+humanoid.WalkSpeed = 30
+
+-- Reapply WalkSpeed if character respawns
+player.CharacterAdded:Connect(function(char)
+	local hum = char:WaitForChild("Humanoid")
+	hum.WalkSpeed = 30
+end)
+
+   end,
+})
