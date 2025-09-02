@@ -1,11 +1,19 @@
 local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 
 
+Rayfield:Notify({
+   Title = "Thanks For Using Our Script",
+   Content = "We Really Appreciate You Using GG Hub Come Back Soon!",
+   Duration = 3,
+   Image = 4483362458,
+})
+
+
 local Window = Rayfield:CreateWindow({
    Name = "GG HUB",
    Icon = 0, -- Icon in Topbar. Can use Lucide Icons (string) or Roblox Image (number). 0 to use no icon (default).
    LoadingTitle = "GG HUB",
-   LoadingSubtitle = "by FebruaryGJB2013",
+   LoadingSubtitle = "by GGVR_1000",
    ShowText = "Rayfield", -- for mobile users to unhide rayfield, change if you'd like
    Theme = "Default", -- Check https://docs.sirius.menu/rayfield/configuration/themes
 
@@ -17,7 +25,7 @@ local Window = Rayfield:CreateWindow({
    ConfigurationSaving = {
       Enabled = true,
       FolderName = nil, -- Create a custom folder for your hub/game
-      FileName = "GG HUB"
+      FileName = "Big Hub"
    },
 
    Discord = {
@@ -28,27 +36,56 @@ local Window = Rayfield:CreateWindow({
 
    KeySystem = false, -- Set this to true to use our key system
    KeySettings = {
-      Title = "KEY SYSTEM",
+      Title = "GG HUB",
       Subtitle = "Key System",
       Note = "No method of obtaining the key is provided", -- Use this to tell the user how to get a key
-      FileName = "GGHUB133090", -- It is recommended to use something unique as other scripts using Rayfield may overwrite your key file
+      FileName = "Key", -- It is recommended to use something unique as other scripts using Rayfield may overwrite your key file
       SaveKey = true, -- The user's key will be saved, but if you change the key, they will be unable to use your script
       GrabKeyFromSite = false, -- If this is true, set Key below to the RAW site you would like Rayfield to get the key from
-      Key = {"GGHUB133090"} -- List of keys that will be accepted by the system, can be RAW file links (pastebin, github etc) or simple strings ("GGHUB133090","GGHUB133090")
+      Key = {"KEY123"} -- List of keys that will be accepted by the system, can be RAW file links (pastebin, github etc) or simple strings ("hello","key22")
    }
 })
 
-local Tab = Window:CreateTab("Tab Example", 4483362458) -- Title, Image
-
 
 local Button = Tab:CreateButton({
-   Name = "Button Example",
+   Name = "ESP",
    Callback = function()
-   local Button = Tab:CreateButton({
-   Name = "Button Example",
-   Callback = function()
-   -- The function that takes place when the button is pressed
-   end,
-})
+   -- LocalScript inside StarterPlayerScripts
+
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+
+-- Function to add/update highlight
+local function refreshHighlight(player)
+    if player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+        local highlight = player.Character:FindFirstChild("Highlight")
+
+        if not highlight then
+            highlight = Instance.new("Highlight")
+            highlight.Name = "Highlight"
+            highlight.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
+            highlight.Parent = player.Character
+        end
+
+        -- Set colors
+        if player == LocalPlayer then
+            highlight.FillColor = Color3.fromRGB(0, 0, 255) -- Blue for self
+            highlight.OutlineColor = Color3.fromRGB(0, 0, 255)
+        else
+            highlight.FillColor = Color3.fromRGB(255, 0, 0) -- Red for others
+            highlight.OutlineColor = Color3.fromRGB(255, 0, 0)
+        end
+    end
+end
+
+-- Loop to refresh every 0.5 seconds
+task.spawn(function()
+    while true do
+        for _, player in ipairs(Players:GetPlayers()) do
+            refreshHighlight(player)
+        end
+        task.wait(0.5)
+    end
+end)
    end,
 })
