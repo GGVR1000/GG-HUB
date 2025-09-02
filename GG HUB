@@ -47,6 +47,9 @@ local Window = Rayfield:CreateWindow({
 })
 
 
+local Tab = Window:CreateTab("ESP's", 4483362458) -- Title, Image
+
+
 local Button = Tab:CreateButton({
    Name = "ESP",
    Callback = function()
